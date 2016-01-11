@@ -626,6 +626,7 @@ class Api(object):
       parameters['exclude_replies'] = 1
 
     json = self._RequestUrl(url, 'GET', data=parameters)
+    self.resp_headers = json.headers
     data = self._ParseAndCheckTwitter(json.content)
 
     return [Status.NewFromJsonDict(x) for x in data]
@@ -1795,6 +1796,7 @@ class Api(object):
       parameters['include_entities'] = 'false'
 
     json = self._RequestUrl(url, 'GET', data=parameters)
+    self.resp_headers = json.headers
     data = self._ParseAndCheckTwitter(json.content)
 
     return User.NewFromJsonDict(data)
