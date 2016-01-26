@@ -1191,6 +1191,7 @@ class Api(object):
         raise TwitterError({'message': "count must be an integer"})
 
     json = self._RequestUrl(url, 'GET', data=parameters)
+    self.resp_headers = json.headers
     data = self._ParseAndCheckTwitter(json.content)
 
     return [Status.NewFromJsonDict(s) for s in data]
